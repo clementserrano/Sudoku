@@ -1,6 +1,6 @@
 ﻿namespace Sudoku
 {
-    partial class Form1
+    partial class VueSudoku
     {
         /// <summary>
         /// Variable nécessaire au concepteur.
@@ -28,9 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // VueSudoku
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(282, 253);
+            this.Name = "VueSudoku";
+            this.Text = "Sudoku";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

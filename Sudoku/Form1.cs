@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Sudoku
 {
-    public partial class Form1 : Form
+    public partial class VueSudoku : Form
     {
-        public Form1()
+        public VueSudoku()
         {
             InitializeComponent();
         }
