@@ -16,7 +16,7 @@ namespace Sudoku
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new VueSudoku());
+            Application.Run(new GUI());
         }
     }
 }
