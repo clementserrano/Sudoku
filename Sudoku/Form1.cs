@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace Sudoku
 {
-    public partial class GUI : Form
+    public partial class Form1 : Form
     {
         Sudoku_Validator validate = new Sudoku_Validator();
 
 
-        public GUI()
+        public Form1()
         {
             InitializeComponent();
         }

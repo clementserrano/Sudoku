@@ -10,8 +10,9 @@ namespace Sudoku
     {
         private int[,] grid;
 
-        public Game() // ADD Parameter for difficulty
+        public Game(String difficulty)
         {
+
             this.grid = new int[9, 9];
             // TODO Generate a grid
 
@@ -38,7 +39,7 @@ namespace Sudoku
             {
                 if (this.grid[i, column] == number)
                 {
-                    return false;
+                    throw new SudokuException("There's already a "+number+" in this column !");
                 }
 
             }
@@ -51,7 +52,7 @@ namespace Sudoku
             {
                 if (this.grid[row, i] == number)
                 {
-                    return false;
+                    throw new SudokuException("There's already a " + number + " in this row !");
                 }
 
             }
@@ -181,7 +182,7 @@ namespace Sudoku
             }
             if (square.Contains(number))
             {
-                return false;
+                throw new SudokuException("There's already a " + number + " in this square !");
             }
             return true;
         }
