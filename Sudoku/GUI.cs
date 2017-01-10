@@ -46,6 +46,7 @@ namespace Sudoku
                     gridNumber[i, j] = n;
                 }
             }
+            game.unlock();
         }
 
         // TextBox behaviour when a key is pressed
@@ -62,9 +63,21 @@ namespace Sudoku
             NumberBox n = (NumberBox)sender;
             try
             {
-                game.setNumber(Int32.Parse(n.Text), n.getX(), n.getY());
+                if (n.Text == "")
+                {
+                    game.setNumber(0, n.getX(), n.getY());
+                }
+                else
+                {
+                    game.setNumber(Int32.Parse(n.Text), n.getX(), n.getY());
+                }
                 n.setOldValue(n.Text);
-            } catch(SudokuException error)
+                if (game.isGridFilled())
+                {
+                    MessageBox.Show("Bravo ! Vous avez gagné !");
+                }
+            }
+            catch (SudokuException error)
             {
                 MessageBox.Show(error.Message);
                 n.Text = n.getOldValue();
