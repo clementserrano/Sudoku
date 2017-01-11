@@ -31,9 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GUI));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.newGameButton = new System.Windows.Forms.ToolStripDropDownButton();
-            this.easyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mediumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.hardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.easyNewGameButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.normalNewGameButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.hardNewGameButton = new System.Windows.Forms.ToolStripMenuItem();
             this.solveButton = new System.Windows.Forms.ToolStripButton();
             this.gridView = new System.Windows.Forms.TableLayoutPanel();
             this.toolStrip1.SuspendLayout();
@@ -55,32 +55,35 @@
             // 
             this.newGameButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.newGameButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.easyToolStripMenuItem,
-            this.mediumToolStripMenuItem,
-            this.hardToolStripMenuItem});
+            this.easyNewGameButton,
+            this.normalNewGameButton,
+            this.hardNewGameButton});
             this.newGameButton.Image = ((System.Drawing.Image)(resources.GetObject("newGameButton.Image")));
             this.newGameButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newGameButton.Name = "newGameButton";
             this.newGameButton.Size = new System.Drawing.Size(78, 22);
             this.newGameButton.Text = "New Game";
             // 
-            // easyToolStripMenuItem
+            // easyNewGameButton
             // 
-            this.easyToolStripMenuItem.Name = "easyToolStripMenuItem";
-            this.easyToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
-            this.easyToolStripMenuItem.Text = "Easy";
+            this.easyNewGameButton.Name = "easyNewGameButton";
+            this.easyNewGameButton.Size = new System.Drawing.Size(152, 22);
+            this.easyNewGameButton.Text = "Easy";
+            this.easyNewGameButton.Click += new System.EventHandler(this.easyNewGameButton_Click);
             // 
-            // mediumToolStripMenuItem
+            // normalNewGameButton
             // 
-            this.mediumToolStripMenuItem.Name = "mediumToolStripMenuItem";
-            this.mediumToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
-            this.mediumToolStripMenuItem.Text = "Normal";
+            this.normalNewGameButton.Name = "normalNewGameButton";
+            this.normalNewGameButton.Size = new System.Drawing.Size(152, 22);
+            this.normalNewGameButton.Text = "Normal";
+            this.normalNewGameButton.Click += new System.EventHandler(this.normalNewGameButton_Click);
             // 
-            // hardToolStripMenuItem
+            // hardNewGameButton
             // 
-            this.hardToolStripMenuItem.Name = "hardToolStripMenuItem";
-            this.hardToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
-            this.hardToolStripMenuItem.Text = "Hard";
+            this.hardNewGameButton.Name = "hardNewGameButton";
+            this.hardNewGameButton.Size = new System.Drawing.Size(152, 22);
+            this.hardNewGameButton.Text = "Hard";
+            this.hardNewGameButton.Click += new System.EventHandler(this.hardNewGameButton_Click);
             // 
             // solveButton
             // 
@@ -90,6 +93,7 @@
             this.solveButton.Name = "solveButton";
             this.solveButton.Size = new System.Drawing.Size(39, 22);
             this.solveButton.Text = "Solve";
+            this.solveButton.Click += new System.EventHandler(this.solveButton_Click);
             // 
             // gridView
             // 
@@ -109,7 +113,7 @@
             this.gridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridView.ForeColor = System.Drawing.SystemColors.ControlText;
             this.gridView.Location = new System.Drawing.Point(0, 25);
-            this.gridView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridView.Margin = new System.Windows.Forms.Padding(2);
             this.gridView.Name = "gridView";
             this.gridView.RowCount = 9;
             this.gridView.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
@@ -132,7 +136,7 @@
             this.ClientSize = new System.Drawing.Size(304, 314);
             this.Controls.Add(this.gridView);
             this.Controls.Add(this.toolStrip1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "GUI";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "Sudoku";
@@ -150,8 +154,8 @@
         private System.Windows.Forms.ToolStripDropDownButton newGameButton;
         private System.Windows.Forms.ToolStripButton solveButton;
         private System.Windows.Forms.TableLayoutPanel gridView;
-        private System.Windows.Forms.ToolStripMenuItem easyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mediumToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem hardToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem easyNewGameButton;
+        private System.Windows.Forms.ToolStripMenuItem normalNewGameButton;
+        private System.Windows.Forms.ToolStripMenuItem hardNewGameButton;
     }
 }
