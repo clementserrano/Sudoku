@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,10 +22,10 @@ namespace Sudoku
             this.game = game;
             oldValue = "";
             Multiline = true;
-            ReadOnly = true;
             BackColor = System.Drawing.SystemColors.Window;
             Dock = DockStyle.Fill;
             MaxLength = 2;
+            Font = new Font(Font.Name, 12, FontStyle.Bold);
             TextAlign = HorizontalAlignment.Center;
             KeyPress += NumberBox_KeyPress;
             TextChanged += NumberBox_TextChanged;

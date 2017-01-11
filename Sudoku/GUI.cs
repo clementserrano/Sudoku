@@ -38,12 +38,12 @@ namespace Sudoku
                     if (game.grid[i, j] == 0)
                     {
                         n.Text = "";
-                        n.ReadOnly = false;
-                        n.ForeColor = Color.Red;
+                        n.ForeColor = Color.IndianRed;
                     }
                     else
                     {
                         n.Text = game.grid[i, j].ToString();
+                        n.Enabled = false;
                     }
                     gridView.Controls.Add(n);
                     gridNumbers[i, j] = n;
