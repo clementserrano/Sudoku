@@ -32,15 +32,18 @@ namespace Sudoku
                     n.Multiline = true;
                     n.Dock = DockStyle.Fill;
                     n.MaxLength = 1;
+                    n.Font = new Font(n.Font.Name, 12, FontStyle.Bold);
                     n.TextAlign = HorizontalAlignment.Center;
                     n.TextChanged += textBoxNumber_TextChanged;
                     n.KeyPress += textBoxNumber_KeyPress;
                     if (game.getGrid()[i, j] == 0) { 
                         n.Text = "";
-                        n.ForeColor = System.Drawing.Color.Red;
+                        n.ForeColor = System.Drawing.Color.IndianRed;
+                        n.BackColor = System.Drawing.Color.Cornsilk;
                     } else
                     {
                         n.Text = game.getGrid()[i, j].ToString();
+                        n.Enabled = false;
                     }
                     gridView.Controls.Add(n);
                     gridNumber[i, j] = n;

@@ -95,7 +95,7 @@
             // 
             this.gridView.AutoSize = true;
             this.gridView.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.gridView.BackColor = System.Drawing.SystemColors.Control;
+            this.gridView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(79)))), ((int)(((byte)(0)))));
             this.gridView.ColumnCount = 9;
             this.gridView.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
             this.gridView.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
@@ -109,7 +109,7 @@
             this.gridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridView.ForeColor = System.Drawing.SystemColors.ControlText;
             this.gridView.Location = new System.Drawing.Point(0, 25);
-            this.gridView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridView.Margin = new System.Windows.Forms.Padding(2);
             this.gridView.Name = "gridView";
             this.gridView.RowCount = 9;
             this.gridView.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.11111F));
@@ -132,7 +132,7 @@
             this.ClientSize = new System.Drawing.Size(304, 314);
             this.Controls.Add(this.gridView);
             this.Controls.Add(this.toolStrip1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "GUI";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "Sudoku";
