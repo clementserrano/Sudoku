@@ -140,6 +140,7 @@
             this.Name = "GUI";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "Sudoku";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.GUI_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
