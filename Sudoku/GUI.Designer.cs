@@ -67,21 +67,21 @@
             // easyNewGameButton
             // 
             this.easyNewGameButton.Name = "easyNewGameButton";
-            this.easyNewGameButton.Size = new System.Drawing.Size(152, 22);
+            this.easyNewGameButton.Size = new System.Drawing.Size(114, 22);
             this.easyNewGameButton.Text = "Easy";
             this.easyNewGameButton.Click += new System.EventHandler(this.easyNewGameButton_Click);
             // 
             // normalNewGameButton
             // 
             this.normalNewGameButton.Name = "normalNewGameButton";
-            this.normalNewGameButton.Size = new System.Drawing.Size(152, 22);
+            this.normalNewGameButton.Size = new System.Drawing.Size(114, 22);
             this.normalNewGameButton.Text = "Normal";
             this.normalNewGameButton.Click += new System.EventHandler(this.normalNewGameButton_Click);
             // 
             // hardNewGameButton
             // 
             this.hardNewGameButton.Name = "hardNewGameButton";
-            this.hardNewGameButton.Size = new System.Drawing.Size(152, 22);
+            this.hardNewGameButton.Size = new System.Drawing.Size(114, 22);
             this.hardNewGameButton.Text = "Hard";
             this.hardNewGameButton.Click += new System.EventHandler(this.hardNewGameButton_Click);
             // 
@@ -139,8 +139,8 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "GUI";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
-            this.Text = "Sudoku";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Sudoku";
             this.Load += new System.EventHandler(this.GUI_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

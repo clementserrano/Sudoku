@@ -12,12 +12,16 @@ namespace Sudoku
         public int[,] gridSolved { get; }
         public bool generated {get; set;}
 
+        /// <summary>
+        /// Generates valid Sudoku grid for the user to solve.
+        /// </summary>
+        /// <param name="difficulty"> Chosen difficulty </param>
         public Game(String difficulty)
         {
             generated = false;
             grid = new int[9, 9];
             
-            // Generate a grid
+            // Generates a grid
             for (int i = 0; i < grid.GetLength(0); i++)
             {
                 for (int j = 0; j < grid.GetLength(1); j++)
@@ -27,7 +31,7 @@ namespace Sudoku
             }
             gridSolved = (int[,])grid.Clone();
 
-            // Remove numbers from grid
+            // Removes numbers from grid
             int nbToRemove = 0;
             switch (difficulty)
             {
@@ -44,23 +48,29 @@ namespace Sudoku
             
             int[,] tempGrid;
             int[,] saveCopy;
-            // temporary grids to save between tests
+            // Temporary grids to save between tests
 
-            int totalBlanks = 0;                        // count of current blanks
-            tempGrid = (int[,])grid.Clone();            // cloned input grid (no damage)
+            int totalBlanks = 0;                        // Count current number of blanks
+            tempGrid = (int[,])grid.Clone();            // Cloned input grid (no damage)
             do
-            {   // call RandomlyBlank() to blank random squares symmetrically
+            {   // Call RandomlyBlank() to blank random squares symmetrically
                 saveCopy = (int[,])tempGrid.Clone();     // in case undo needed
                 tempGrid = RandomlyBlank(tempGrid, ref totalBlanks);
-                // blanks 1 or 2 squares according to symmetry chosen
+                // Blanks 1 or 2 squares according to symmetry chosen
                 grid = new int[9,9];
             } while (totalBlanks < nbToRemove);
             grid = tempGrid;
         }
 
+        /// <summary>
+        /// Randomly blanks cells for the user to resolve.
+        /// </summary>
+        /// <param name="tempGrid"> Sudoku grid </param>
+        /// <param name="blankCount"> Number of blanked cells </param>
+        /// <returns> Sudoku grid with blanked cells </returns>
         public int[,] RandomlyBlank(int[,] tempGrid, ref int blankCount)
         {
-            //blank one or two squares(depending on if on center line) randomly
+            // Blanks one or two squares(depending on if on center line) randomly
             Random rnd = new Random();          // allow random number generation
             int row = rnd.Next(0, 8);           // choose randomly the row
             int column = rnd.Next(0, 8);        // and column of cell to blank
@@ -80,6 +90,13 @@ namespace Sudoku
             return tempGrid;
         }
 
+        /// <summary>
+        /// Checks that inputted caracter is a number between 1 and 9 and that is unique in its column, row and square. 
+        /// </summary>
+        /// <param name="number"> Inputted number </param>
+        /// <param name="row"> Given cell's row position </param>
+        /// <param name="column"> Given cell's column position </param>
+        /// <returns> True if number settled, else false </returns>
         public bool setNumber(int number, int row, int column)
         {
             if (grid[row, column] == number)
@@ -94,6 +111,12 @@ namespace Sudoku
             return false;
         }
 
+        /// <summary>
+        /// General algorith for finding all solutions for a generated grid. 
+        /// </summary>
+        /// <param name="x"> Given cell's row position </param>
+        /// <param name="y"> Given cell's column position </param>
+        /// <returns> True if solution found, else false </returns>
         public bool backtrack(int x, int y)
         {
             if (isGridFilled())
@@ -117,6 +140,10 @@ namespace Sudoku
             return false;   // Solution not found. Backtrack.
         }
 
+        /// <summary>
+        /// Checks if current grid is filled.
+        /// </summary>
+        /// <returns> True if filled, else false </returns>
         public bool isGridFilled()
         {
             for (int i = 0; i < grid.GetLength(0); i++)
@@ -132,6 +159,12 @@ namespace Sudoku
             return true;
         }
 
+        /// <summary>
+        /// Calculates next cell's position of a given cell.
+        /// </summary>
+        /// <param name="x"> Given cell's current row position </param>
+        /// <param name="y"> Given cell's current column position </param>
+        /// <returns> Tuple (row, column) of next cell's position </row></returns>
         public Tuple<int, int> nextPosition(int x, int y)
         {
             int rx = 0;
@@ -149,6 +182,12 @@ namespace Sudoku
             return new Tuple<int, int>(rx, ry);
         }
 
+        /// <summary>
+        /// Checks that inputted number isn't already in the same column.
+        /// </summary>
+        /// <param name="number"> Inputted number </param>
+        /// <param name="column"> Changed cell's column position </param>
+        /// <returns></returns>
         private bool checkColumn(int number, int column)
         {
             for (int i = 0; i < grid.GetLength(0); i++)
@@ -166,6 +205,12 @@ namespace Sudoku
             return true;
         }
 
+        /// <summary>
+        /// Checks that inputted number isn't already in the same row.
+        /// </summary>
+        /// <param name="number"> Inputted number </param>
+        /// <param name="row"> Changed cell's row position </param>
+        /// <returns></returns>
         private bool checkRow(int number, int row)
         {
             for (int i = 0; i < grid.GetLength(1); i++)
@@ -183,6 +228,13 @@ namespace Sudoku
             return true;
         }
 
+        /// <summary>
+        /// Checks that inputted number isn't already in the 3x3 square.
+        /// </summary>
+        /// <param name="number"> Inputted number </param>
+        /// <param name="row"> Changed cell's row position </param>
+        /// <param name="column"> Changed cell's column position </param>
+        /// <returns></returns>
         private bool checkSquare(int number, int row, int column)
         {
             // Check the position within the square to retrieve the square numbers
@@ -315,6 +367,10 @@ namespace Sudoku
             return true;
         }
         
+        /// <summary>
+        ///  Modifies display.
+        /// </summary>
+        /// <returns> String to display </returns>
         public override string ToString()
         {
             string res = "";
