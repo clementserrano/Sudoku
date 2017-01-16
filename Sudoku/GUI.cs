@@ -63,7 +63,7 @@ namespace Sudoku
         /// Generates and displays a valid sudoku game.  
         /// </summary>
         /// <param name="difficulty"> Chosen difficulty </param>
-        private void newGame(string difficulty)
+        public void newGame(string difficulty)
         {
             // Clear the subgrid controls
             for (int i = 0; i < subgridView.GetLength(0); i++)
@@ -79,7 +79,7 @@ namespace Sudoku
             {
                 for (int j = 0; j < 9; j++)
                 {
-                    NumberBox n = new NumberBox(i, j, game);
+                    NumberBox n = new NumberBox(i, j, game, this);
                     if (game.grid[i, j] == 0)
                     { // Changes font color for editable cells
                         n.Text = "";

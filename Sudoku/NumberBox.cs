@@ -14,13 +14,15 @@ namespace Sudoku
         public int y { get; }
         public String oldValue { get; set; }
         private Game game;
+        private GUI gui;
         private int size;
 
-        public NumberBox(int x, int y, Game game)
+        public NumberBox(int x, int y, Game game, GUI gui)
         {
             this.x = x;
             this.y = y;
             this.game = game;
+            this.gui = gui;
             oldValue = "";
             Multiline = true;
             BackColor = System.Drawing.SystemColors.Window;
@@ -60,6 +62,8 @@ namespace Sudoku
                 {
                     MessageBox.Show("Bravo ! Vous avez gagné !");
                     game.generated = false;
+                    // END GAME
+                    gui.newGame("easy");
                 }
             }
             catch (SudokuException error)
