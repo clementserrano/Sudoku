@@ -39,7 +39,7 @@ namespace Sudoku
                     nbToRemove = 40;
                     break;
                 case "normal":
-                    nbToRemove = 45;
+                    nbToRemove = 1;
                     break;
                 case "hard":
                     nbToRemove = 50;

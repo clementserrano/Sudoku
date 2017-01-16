@@ -58,6 +58,7 @@ namespace Sudoku
                 if (game.isGridFilled() && game.generated)
                 {
                     MessageBox.Show("Bravo ! Vous avez gagné !");
+                    game.generated = false;
                 }
             }
             catch (SudokuException error)
