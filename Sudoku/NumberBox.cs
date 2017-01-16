@@ -23,8 +23,9 @@ namespace Sudoku
             oldValue = "";
             Multiline = true;
             BackColor = System.Drawing.SystemColors.Window;
+            BorderStyle = BorderStyle.None;
             Dock = DockStyle.Fill;
-            Margin = new Padding(0);
+            Margin = new Padding(1);
             MaxLength = 2;
             Font = new Font(Font.Name, 12, FontStyle.Bold);
             TextAlign = HorizontalAlignment.Center;

@@ -72,21 +72,21 @@ namespace Sudoku
         {
             // Blanks one or two squares(depending on if on center line) randomly
             Random rnd = new Random();          // allow random number generation
-            int row = rnd.Next(0, 8);           // choose randomly the row
-            int column = rnd.Next(0, 8);        // and column of cell to blank
+            int row = rnd.Next(0, 9);           // choose randomly the row
+            int column = rnd.Next(0, 9);        // and column of cell to blank
             while (tempGrid[row, column] == 0)  // don't blank a blank cell
             {
-                row = rnd.Next(0, 8);
-                column = rnd.Next(0, 8);
+                row = rnd.Next(0, 9);
+                column = rnd.Next(0, 9);
             }
             tempGrid[row, column] = 0;          // clear chosen cell
             blankCount++;                       // increment the count of blanks
             
-            // symmetry
-            if (tempGrid[8 - row, column] != 0)
+            // diagonal symmetry
+            if (tempGrid[column, row] != 0)
                 blankCount++;
-            tempGrid[8 - row, column] = 0;
-                   
+            tempGrid[column, row] = 0;
+
             return tempGrid;
         }
 

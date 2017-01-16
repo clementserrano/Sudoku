@@ -14,6 +14,7 @@ namespace Sudoku
     {
         private Game game;
         private NumberBox[,] gridNumbers;
+        private TableLayoutPanel[,] subgridView;
 
         public GUI()
         {
@@ -26,6 +27,34 @@ namespace Sudoku
         /// <param name="e"></param>
         private void GUI_Load(object sender, EventArgs e)
         {
+            gridView.Padding = new Padding(2);
+            // Create the subgrids in the main TableLayoutPanel
+            subgridView = new TableLayoutPanel[3,3];
+            for (int i = 0; i < subgridView.GetLength(0); i++)
+            {
+                for (int j = 0; j < subgridView.GetLength(1); j++)
+                {
+                    TableLayoutPanel subgrid = new TableLayoutPanel();
+
+                    subgrid.ColumnCount = 3;
+                    subgrid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+                    subgrid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+                    subgrid.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+
+                    subgrid.RowCount = 3;
+                    subgrid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+                    subgrid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+                    subgrid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+
+                    subgrid.Dock = DockStyle.Fill;
+                    subgrid.Margin = new Padding(1);
+                    subgrid.Padding = new Padding(0);
+                    subgrid.BackColor = System.Drawing.SystemColors.ControlDark;
+
+                    gridView.Controls.Add(subgrid);
+                    subgridView[i, j] = subgrid;
+                }
+            }
             newGame("normal");
         }
 
@@ -35,7 +64,14 @@ namespace Sudoku
         /// <param name="difficulty"> Chosen difficulty </param>
         private void newGame(string difficulty)
         {
-            gridView.Controls.Clear();
+            // Clear the subgrid controls
+            for (int i = 0; i < subgridView.GetLength(0); i++)
+            {
+                for (int j = 0; j < subgridView.GetLength(1); j++)
+                {
+                    subgridView[i, j].Controls.Clear();
+                }
+            }
             game = new Game(difficulty);
             gridNumbers = new NumberBox[9, 9];
             for (int i = 0; i < 9; i++)
@@ -53,8 +89,15 @@ namespace Sudoku
                         n.Text = game.grid[i, j].ToString();
                         n.Enabled = false;
                     }
-                    gridView.Controls.Add(n);
                     gridNumbers[i, j] = n;
+                    // Atttribute the NummberBox to the right subgrid
+                    int i2 = 0;
+                    int j2 = 0;
+                    if (i >= 3 && i < 6) i2 = 1;
+                    if (i >= 6) i2 = 2;
+                    if (j >= 3 && j < 6) j2 = 1;
+                    if (j >= 6) j2 = 2;
+                    subgridView[i2, j2].Controls.Add(n);
                 }
             }
             game.generated = true;
