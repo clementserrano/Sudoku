@@ -35,7 +35,7 @@ namespace Sudoku
             BorderStyle = BorderStyle.None;
             Dock = DockStyle.Fill;
             Margin = new Padding(1);
-            MaxLength = 2;
+            MaxLength = 1;
             Font = new Font(Font.Name, 12, FontStyle.Bold);
             TextAlign = HorizontalAlignment.Center;
             KeyPress += NumberBox_KeyPress;
@@ -67,7 +67,7 @@ namespace Sudoku
             {
                 if (n.Text == "")
                 {
-                    game.setNumber(0, n.x, n.y);
+                    game.resetCell(n.x, n.y);
                 }
                 else
                 {

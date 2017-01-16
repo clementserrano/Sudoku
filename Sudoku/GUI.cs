@@ -12,14 +12,14 @@ namespace Sudoku
 {
     public partial class GUI : Form
     {
-        private Game game;
-        private NumberBox[,] gridNumbers;
-        private TableLayoutPanel[,] subgridView;
+        private Game game; // Sudoku game w/ matrix of int
+        private NumberBox[,] gridNumbers; // Matrix of TextBox
+        private TableLayoutPanel[,] subgridView; // Matrix of subgrid (3x3)
 
         public GUI()
         {
             InitializeComponent();
-            Resize += GUI_Resize;
+            Resize += GUI_Resize; // Resize font behaviour
         }
         /// <summary>
         /// Creates new "normal" game by default.
@@ -35,6 +35,7 @@ namespace Sudoku
             {
                 for (int j = 0; j < subgridView.GetLength(1); j++)
                 {
+                    // Creation of the subgrid
                     TableLayoutPanel subgrid = new TableLayoutPanel();
 
                     subgrid.ColumnCount = 3;
@@ -52,6 +53,7 @@ namespace Sudoku
                     subgrid.Padding = new Padding(0);
                     subgrid.BackColor = System.Drawing.SystemColors.ControlDark;
 
+                    // Adding subgrid to main grid
                     gridView.Controls.Add(subgrid);
                     subgridView[i, j] = subgrid;
                  }
@@ -169,11 +171,12 @@ namespace Sudoku
         private void GUI_Resize(object sender, EventArgs e)
         {
             int size = (int)(subgridView[0, 0].Controls[0].Height * 0.65);
+            // 0.65 should make the font fill the NumberBox w/ a center vertical-align but depending 
+            //of the computer screen size, sometimes it's not perfectly at the center of the NumberBox
             foreach (TableLayoutPanel subgrid in subgridView)
             {
                 foreach(Control box in subgrid.Controls)
                 {
-
                     box.Font = new Font(box.Font.FontFamily.Name, size);
                 }
             }

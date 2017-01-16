@@ -114,6 +114,16 @@ namespace Sudoku
         }
 
         /// <summary>
+        /// Reset the cell value to 0
+        /// </summary>
+        /// <param name="row"> Given cell's row position </param>
+        /// <param name="column"> Given cell's column position </param>
+        public void resetCell(int row, int column)
+        {
+            grid[row, column] = 0;
+        }
+
+        /// <summary>
         /// General algorith for finding all solutions for a generated grid. 
         /// </summary>
         /// <param name="x"> Given cell's row position </param>
@@ -370,7 +380,7 @@ namespace Sudoku
         }
         
         /// <summary>
-        ///  Modifies display.
+        ///  Modifies display for debuging
         /// </summary>
         /// <returns> String to display </returns>
         public override string ToString()
