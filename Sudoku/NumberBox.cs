@@ -15,8 +15,14 @@ namespace Sudoku
         public String oldValue { get; set; }
         private Game game;
         private GUI gui;
-        private int size;
 
+        /// <summary>
+        /// Constructor of each cells representing a number box. 
+        /// </summary>
+        /// <param name="x"> Cell's row position </param>
+        /// <param name="y"> Cell's column position </param>
+        /// <param name="game"> Current game </param>
+        /// <param name="gui"> Current GUI </param>
         public NumberBox(int x, int y, Game game, GUI gui)
         {
             this.x = x;
@@ -36,6 +42,11 @@ namespace Sudoku
             TextChanged += NumberBox_TextChanged;
         }
 
+        /// <summary>
+        /// Displays only if inputs are numbers from 1 to 9.
+        /// </summary>
+        /// <param name="sender"> Key pressed </param>
+        /// <param name="e">  Contains the key event data </param>
         private void NumberBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) || e.KeyChar == '0')
@@ -44,6 +55,11 @@ namespace Sudoku
             }
         }
 
+        /// <summary>
+        /// Sets numbers and offers to play again with a harder difficulty level or quit game when the player won.
+        /// </summary>
+        /// <param name="sender"> Selected cell </param>
+        /// <param name="e"> Contains the event data </param>
         private void NumberBox_TextChanged(object sender, EventArgs e)
         {
             NumberBox n = (NumberBox)sender;
@@ -58,12 +74,21 @@ namespace Sudoku
                     game.setNumber(Int32.Parse(n.Text), n.x, n.y);
                 }
                 n.oldValue = n.Text;
-                if (game.isGridFilled() && game.generated)
+                if (game.isGridFilled() && game.generated) // Game over, grid filled and correct
                 {
-                    MessageBox.Show("Bravo ! Vous avez gagné !");
+                    MessageBox.Show("Bravo ! Vous avez gagné !","Game over", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     game.generated = false;
-                    // END GAME
-                    gui.newGame("easy");
+                    
+                    if (MessageBox.Show("Voulez vous jouer à nouveau?", "Play again?", MessageBoxButtons.YesNo, MessageBoxIcon.Question)== DialogResult.Yes)
+                    {
+                      // Generates harder game if player wants to try again
+                      string harderGame;
+                      if (game.currentDiff == "easy") harderGame = "normal";
+                      else harderGame = "hard";                        
+                      gui.newGame(harderGame);
+                    }
+                    else
+                        Application.Exit();
                 }
             }
             catch (SudokuException error)

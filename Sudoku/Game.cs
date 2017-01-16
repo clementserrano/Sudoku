@@ -11,6 +11,7 @@ namespace Sudoku
         public int[,] grid { get;}
         public int[,] gridSolved { get; }
         public bool generated {get; set;}
+        public String currentDiff;
 
         /// <summary>
         /// Generates valid Sudoku grid for the user to solve.
@@ -18,6 +19,7 @@ namespace Sudoku
         /// <param name="difficulty"> Chosen difficulty </param>
         public Game(String difficulty)
         {
+            currentDiff = difficulty;
             generated = false;
             grid = new int[9, 9];
             
@@ -39,7 +41,7 @@ namespace Sudoku
                     nbToRemove = 40;
                     break;
                 case "normal":
-                    nbToRemove = 1;
+                    nbToRemove = 45;
                     break;
                 case "hard":
                     nbToRemove = 50;
@@ -187,7 +189,7 @@ namespace Sudoku
         /// </summary>
         /// <param name="number"> Inputted number </param>
         /// <param name="column"> Changed cell's column position </param>
-        /// <returns></returns>
+        /// <returns> True if inputted number is unique in its column, else false </returns>
         private bool checkColumn(int number, int column)
         {
             for (int i = 0; i < grid.GetLength(0); i++)
@@ -210,7 +212,7 @@ namespace Sudoku
         /// </summary>
         /// <param name="number"> Inputted number </param>
         /// <param name="row"> Changed cell's row position </param>
-        /// <returns></returns>
+        /// <returns> True if inputted number is unique in its row, else false </returns>
         private bool checkRow(int number, int row)
         {
             for (int i = 0; i < grid.GetLength(1); i++)
@@ -234,7 +236,7 @@ namespace Sudoku
         /// <param name="number"> Inputted number </param>
         /// <param name="row"> Changed cell's row position </param>
         /// <param name="column"> Changed cell's column position </param>
-        /// <returns></returns>
+        /// <returns> True if inputted number is unique in its square, else false </returns>
         private bool checkSquare(int number, int row, int column)
         {
             // Check the position within the square to retrieve the square numbers

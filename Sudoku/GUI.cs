@@ -25,7 +25,7 @@ namespace Sudoku
         /// Creates new "normal" game by default.
         /// </summary>
         /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="e"> Contains the event data </param>
         private void GUI_Load(object sender, EventArgs e)
         {
             gridView.Padding = new Padding(2);
@@ -54,7 +54,7 @@ namespace Sudoku
 
                     gridView.Controls.Add(subgrid);
                     subgridView[i, j] = subgrid;
-                }
+                 }
             }
             newGame("normal");
         }
@@ -65,6 +65,12 @@ namespace Sudoku
         /// <param name="difficulty"> Chosen difficulty </param>
         public void newGame(string difficulty)
         {
+            // Highlights current difficulty
+            easyNewGameButton.BackColor = normalNewGameButton.BackColor = hardNewGameButton.BackColor = Color.Empty;
+            if (difficulty=="easy") easyNewGameButton.BackColor = Color.LightGray;
+            if (difficulty == "normal") normalNewGameButton.BackColor = Color.LightGray;
+            if (difficulty == "hard") hardNewGameButton.BackColor = Color.LightGray;
+
             // Clear the subgrid controls
             for (int i = 0; i < subgridView.GetLength(0); i++)
             {
@@ -80,10 +86,11 @@ namespace Sudoku
                 for (int j = 0; j < 9; j++)
                 {
                     NumberBox n = new NumberBox(i, j, game, this);
+
                     if (game.grid[i, j] == 0)
                     { // Changes font color for editable cells
                         n.Text = "";
-                        n.ForeColor = Color.IndianRed;
+                        n.ForeColor = ColorTranslator.FromHtml("#ff6666");
                     }
                     else
                     { // Disable given numbers
@@ -91,13 +98,29 @@ namespace Sudoku
                         n.Enabled = false;
                     }
                     gridNumbers[i, j] = n;
-                    // Atttribute the NummberBox to the right subgrid
+                    // Atttribute the NummberBox to the right subgrid and colors square zones
                     int i2 = 0;
                     int j2 = 0;
-                    if (i >= 3 && i < 6) i2 = 1;
-                    if (i >= 6) i2 = 2;
-                    if (j >= 3 && j < 6) j2 = 1;
-                    if (j >= 6) j2 = 2;
+                    if (i >= 3 && i < 6)
+                    {
+                        i2 = 1;
+                        if (j < 3) n.BackColor = Color.LightGray;
+                    }
+                    if (i >= 6)
+                    {
+                        i2 = 2;
+                        if (j >= 3 && j < 6) n.BackColor = Color.LightGray;
+                    }
+                    if (j >= 3 && j < 6)
+                    {
+                        j2 = 1;
+                        if (i < 3) n.BackColor = Color.LightGray;
+                    }
+                    if (j >= 6)
+                    {
+                        j2 = 2;
+                        if (i >= 3 && i < 6) n.BackColor = Color.LightGray;
+                    }
                     subgridView[i2, j2].Controls.Add(n);
                 }
             }
@@ -106,13 +129,14 @@ namespace Sudoku
         }
 
         /// <summary>
-        /// Solves the current Sudoku after clicking on the button.
+        /// Solves the current Sudoku and offers to play again with an easier difficulty level or quit the game.
         /// </summary>
         /// <param name="sender"> Solve button </param>
         /// <param name="e"> Contains the event data </param>
-        private void solveButton_Click(object sender, EventArgs e)
+        private async void solveButton_Click(object sender, EventArgs e)
         {
             game.generated = false;
+            MessageBox.Show("Voici une solution...", "Solve", MessageBoxButtons.OK,MessageBoxIcon.Asterisk);
             for (int i = 0; i < 9; i++)
             {
                 for (int j = 0; j < 9; j++)
@@ -120,13 +144,28 @@ namespace Sudoku
                     if (gridNumbers[i, j].Enabled == true)
                     { // Disable and highlights solved cells
                         gridNumbers[i, j].Enabled = false;
-                        gridNumbers[i, j].BackColor = Color.Moccasin;
+                        gridNumbers[i, j].BackColor = ColorTranslator.FromHtml("#ff6666");
                     }
                     gridNumbers[i, j].Text = game.gridSolved[i, j].ToString();
                 }
             }
+            await Task.Delay(2500); // Gives some time to see resolved game
+            if (MessageBox.Show("Voulez vous jouer à nouveau?", "Game over", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            { // Generates easier game if player wants to try again
+                string easierGame;
+                if (game.currentDiff == "hard") easierGame = "normal";
+                else easierGame = "easy";
+                this.newGame(easierGame);
+            }
+            else // Exits game
+                Application.Exit();
         }
 
+        /// <summary>
+        /// Resizes text when resizing the game
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"> Contains the event data </param>
         private void GUI_Resize(object sender, EventArgs e)
         {
             int size = (int)(subgridView[0, 0].Controls[0].Height * 0.65);
@@ -167,5 +206,6 @@ namespace Sudoku
         {
             newGame("hard");
         }
+
     }
 }
