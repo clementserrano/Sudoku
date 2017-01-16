@@ -19,6 +19,7 @@ namespace Sudoku
         public GUI()
         {
             InitializeComponent();
+            Resize += GUI_Resize;
         }
         /// <summary>
         /// Creates new "normal" game by default.
@@ -101,6 +102,7 @@ namespace Sudoku
                 }
             }
             game.generated = true;
+            GUI_Resize(null, null);
         }
 
         /// <summary>
@@ -121,6 +123,19 @@ namespace Sudoku
                         gridNumbers[i, j].BackColor = Color.Moccasin;
                     }
                     gridNumbers[i, j].Text = game.gridSolved[i, j].ToString();
+                }
+            }
+        }
+
+        private void GUI_Resize(object sender, EventArgs e)
+        {
+            int size = (int)(subgridView[0, 0].Controls[0].Height * 0.65);
+            foreach (TableLayoutPanel subgrid in subgridView)
+            {
+                foreach(Control box in subgrid.Controls)
+                {
+
+                    box.Font = new Font(box.Font.FontFamily.Name, size);
                 }
             }
         }

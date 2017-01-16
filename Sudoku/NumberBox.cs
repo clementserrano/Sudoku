@@ -14,6 +14,7 @@ namespace Sudoku
         public int y { get; }
         public String oldValue { get; set; }
         private Game game;
+        private int size;
 
         public NumberBox(int x, int y, Game game)
         {
